@@ -57,7 +57,7 @@ namespace WeAreTheChampions
 
         private void btnAddGame_Click(object sender, EventArgs e)
         {
-            GamesForm gamesForm = new GamesForm(db,null);
+            GamesForm gamesForm = new GamesForm(db);
             gamesForm.GamesChanged += GamesForm_GamesChanged;
             gamesForm.ShowDialog();
         }

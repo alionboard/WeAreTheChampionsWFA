@@ -10,6 +10,10 @@ namespace WeAreTheChampions.Models
     [Table("Color")]
     public class Color
     {
+        public Color()
+        {
+            this.Teams = new HashSet<Team>();
+        }
         public int Id { get; set; }
         public string ColorName { get; set; }
         public byte Red { get; set; }

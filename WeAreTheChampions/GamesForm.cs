@@ -14,21 +14,26 @@ namespace WeAreTheChampions
     public partial class GamesForm : Form
     {
         ChampionsContext db;
-        private int? gameId;
+        private int gameId;
 
         public event EventHandler GamesChanged;
-        public GamesForm(ChampionsContext db, int? gameId)
+        public GamesForm(ChampionsContext db, int gameId)
         {
             this.db = db;
             this.gameId = gameId;
             InitializeComponent();
+            FillSourcesForEdit();
+        }
+        public GamesForm(ChampionsContext db)
+        {
+            this.db = db;
+            InitializeComponent();
             FillSources();
-            if (gameId != null)
-                FillSourcesForEdit();
         }
 
         private void FillSourcesForEdit()
         {
+            FillSources();
             btnSave.Text = "Save";
             Match match = db.Matches.Find(gameId);
             for (int i = 0; i < cboTeam1.Items.Count; i++)
@@ -108,11 +113,6 @@ namespace WeAreTheChampions
                 MessageBox.Show("You must enter scores as Numeric!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            if ((int)cboTeam1.SelectedValue == (int)cboTeam2.SelectedValue) 
-            {
-                MessageBox.Show("Both teams are same!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
 
             DateTime dateTime = dtpDate.Value.Date + dtpTime.Value.TimeOfDay;
             Result result;
@@ -127,7 +127,7 @@ namespace WeAreTheChampions
                     result = Result.Draw;
                 if (btnSave.Text == "Save")
                 {
-                    
+
                     Match match = db.Matches.Find(gameId);
                     match.Team1Id = (int)cboTeam1.SelectedValue;
                     match.Team2Id = (int)cboTeam2.SelectedValue;
@@ -190,5 +190,38 @@ namespace WeAreTheChampions
         {
             Close();
         }
+
+        private void cboTeam1_SelectedValueChanged(object sender, EventArgs e)
+        {
+            if ((Team)cboTeam1.SelectedItem == (Team)cboTeam2.SelectedItem)
+            {
+                for (int i = 0; i < cboTeam2.Items.Count; i++)
+                {
+                    if (cboTeam1.SelectedIndex != i)
+                    {
+                        cboTeam2.SelectedIndex = i;
+                        break;
+                    }
+                }
+            }
+
+
+        }
+        private void cboTeam2_SelectedValueChanged(object sender, EventArgs e)
+        {
+
+            if ((Team)cboTeam1.SelectedItem == (Team)cboTeam2.SelectedItem)
+            {
+                for (int i = 0; i < cboTeam1.Items.Count; i++)
+                {
+                    if (cboTeam2.SelectedIndex != i)
+                    {
+                        cboTeam1.SelectedIndex = i;
+                        break;
+                    }
+                }
+            }
+        }
+
     }
 }

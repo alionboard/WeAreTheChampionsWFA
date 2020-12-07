@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WeAreTheChampions.Models
 {
-    public class MyInitStrategy : CreateDatabaseIfNotExists<ChampionsContext>
+    public class MyInitStrategy : DropCreateDatabaseAlways<ChampionsContext>
     {
         protected override void Seed(ChampionsContext context)
         {

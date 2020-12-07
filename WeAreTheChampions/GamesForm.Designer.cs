@@ -55,6 +55,7 @@
             this.cboTeam1.Size = new System.Drawing.Size(121, 22);
             this.cboTeam1.TabIndex = 0;
             this.cboTeam1.ValueMember = "Id";
+            this.cboTeam1.SelectedValueChanged += new System.EventHandler(this.cboTeam1_SelectedValueChanged);
             // 
             // cboTeam2
             // 
@@ -66,6 +67,7 @@
             this.cboTeam2.Size = new System.Drawing.Size(121, 22);
             this.cboTeam2.TabIndex = 1;
             this.cboTeam2.ValueMember = "Id";
+            this.cboTeam2.SelectedValueChanged += new System.EventHandler(this.cboTeam2_SelectedValueChanged);
             // 
             // label1
             // 
