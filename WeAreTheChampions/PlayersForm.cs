@@ -41,8 +41,6 @@ namespace WeAreTheChampions
                 Name = x.PlayerName,
                 Team = x.TeamId != null ? x.Team.TeamName : null
             }).ToList();
-
-
         }
 
         private void btnAddPlayer_Click(object sender, EventArgs e)
@@ -83,12 +81,7 @@ namespace WeAreTheChampions
                 }
             }
             else
-            {
                 chkEditPlayer.Checked = true;
-            }
-            ListPlayers();
-
-
         }
 
         private void btnFinish_Click(object sender, EventArgs e)
@@ -143,7 +136,6 @@ namespace WeAreTheChampions
             txtNewPlayerName.Clear();
             chkNewPlayer.Checked = false;
             CancelChange();
-
         }
 
         private void CancelChange()
@@ -194,7 +186,6 @@ namespace WeAreTheChampions
             int id = (int)cboFilterTeams.SelectedValue;
             Team selected = (Team)cboFilterTeams.SelectedItem;
 
-
             if (id > 0)
             {
                 dgvPlayers.DataSource = db.Players.Where(x => x.TeamId == id).ToList().Select(x => new
@@ -223,8 +214,6 @@ namespace WeAreTheChampions
                     Team = x.TeamId != null ? x.Team.TeamName : null
                 }).ToList();
             }
-
-            
         }
     }
 }

@@ -14,6 +14,7 @@ namespace WeAreTheChampions.Models
         {
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
         }
+
         public ChampionsContext() : base("name=conStr")
         {
 
